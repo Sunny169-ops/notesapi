@@ -35,7 +35,7 @@ app.post('/note',jsonParser, async(req, res)=>{
     await data.save().then((result)=>{
         res.status(201).json(result)
     }).catch((error)=>{
-        console.warn(error)
+        res.status(500)
     })
 })
 
@@ -45,7 +45,7 @@ app.delete('/note/:id', async(req,res)=>{
     }).then((result)=>{
         res.status(200).json(result)
     }).catch((error)=>{
-        console.warn(error)
+        res.status(500)
     })
 })
 
@@ -63,7 +63,7 @@ app.put('/note/:id',jsonParser,async(req,res)=>{
     ).then((result)=>{
         res.status(201).json(result)
     }).catch((error)=>{
-        console.warn(error)
+        res.status(500)
     })
 })
 
