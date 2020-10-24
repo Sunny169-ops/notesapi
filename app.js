@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+var PORT  = process.env.PORT || 4500;
 const mongoose = require('mongoose');
 const Notes = require('./models/notes');
 var bodyParser = require('body-parser')
@@ -66,4 +67,4 @@ app.put('/note/:id',jsonParser,(req,res)=>{
     })
 })
 
-app.listen(4500);
+app.listen(PORT);
