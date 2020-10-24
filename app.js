@@ -18,29 +18,29 @@ mongoose.connect('mongodb+srv://notesapi:7uQq2U8WHaTObSSJ@cluster0.klec8.mongodb
 
 // <------------------------------ API---------------------------->
 
-app.get('/notes', (req,res)=>{
-    Notes.find().then((data)=>{
+app.get('/notes', async(req,res)=>{
+    await Notes.find().then((data)=>{
         res.json(data)
     })
     
 })
 
-app.post('/note',jsonParser, (req, res)=>{
+app.post('/note',jsonParser, async(req, res)=>{
   
     const data = new Notes({
         _id:new mongoose.Types.ObjectId(),
         title: req.body.title,
         description: req.body.description,
     })
-    data.save().then((result)=>{
+    await data.save().then((result)=>{
         res.status(201).json(result)
     }).catch((error)=>{
         console.warn(error)
     })
 })
 
-app.delete('/note/:id', (req,res)=>{
-    Notes.deleteOne({
+app.delete('/note/:id', async(req,res)=>{
+    await Notes.deleteOne({
         _id:req.params.id
     }).then((result)=>{
         res.status(200).json(result)
@@ -50,8 +50,8 @@ app.delete('/note/:id', (req,res)=>{
 })
 
 
-app.put('/note/:id',jsonParser,(req,res)=>{
-    Notes.updateOne({
+app.put('/note/:id',jsonParser,async(req,res)=>{
+     await Notes.updateOne({
         _id:req.params.id
     },
     {
